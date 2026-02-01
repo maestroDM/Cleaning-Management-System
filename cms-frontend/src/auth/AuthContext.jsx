@@ -5,6 +5,7 @@ export const AuthContext = createContext()
 
 export function AuthProvider({children}) {
     const [token, setToken] = useState(localStorage.getItem("token"))
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
 
     const login = async (credentials) => {
         try {
@@ -15,7 +16,10 @@ export function AuthProvider({children}) {
 
             if (receivedToken) {
                 localStorage.setItem("token", receivedToken)
+                localStorage.setItem("user", JSON.stringify(response.data.user))
                 setToken(receivedToken)
+                setUser(response.data.user)
+                return response.data.user
                 return true
             }
         } catch (error) {
@@ -26,11 +30,13 @@ export function AuthProvider({children}) {
 
     const logout = () => {
         localStorage.removeItem("token")
+        localStorage.removeItem("user")
         setToken(null)
+        setUser(null)
     }
 
     return (
-        <AuthContext.Provider value={{token, login, logout}}>
+        <AuthContext.Provider value={{token, login, logout, user}}>
             {children}
         </AuthContext.Provider>
     )

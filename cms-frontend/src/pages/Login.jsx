@@ -11,8 +11,17 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await login({email, password})
-            navigate("/dashboard")
+            const user = await login({email, password})
+            
+            if(user.role_id === 1){
+                navigate("/dashboard")
+            } else if(user.role_id === 2){
+                navigate("/tasks")
+            }else if(user.role_id === 3){
+                navigate("/services")
+            }else{
+                alert("Invalid user")
+            }
         } catch (error) {
             console.error("Login error:", error.response?.data || error.message)
             alert(error.response?.data?.message || "Login failed")
