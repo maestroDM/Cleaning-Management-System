@@ -1,6 +1,7 @@
 import {useState} from "react"
 import api from "../api/axios.js"
 import {useNavigate} from "react-router-dom"
+import "../styles/Auth.css"
 
 export default function Register() {
     const [form, setForm] = useState({
@@ -33,21 +34,47 @@ export default function Register() {
     }
 
     return (
-        <div className="register-container">
-            <form>
-                <h2>Create Account</h2>
-                <input name="name" placeholder="Name" onChange={handleChange} />
-                <input name="email" type="email" placeholder="Email" onChange={handleChange} />
-                <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-                <input name="password_confirmation" type="password" placeholder="Confirm Password" onChange={handleChange} />
-
-                <p>Register as:</p>
-                <div className="flex gap-4">
-                    <button type="button" onClick={(e) => handleSubmit(e, 2)}>Staff</button>
-                    <button type="button" onClick={(e) => handleSubmit(e, 3)}>User</button>
-                </div>
-            </form>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="auth-title">Register</h2>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className="form-group">
+                        <input
+                            placeholder="Name"
+                            onChange={(e) => setForm({...form, name: e.target.value})}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            onChange={(e) => setForm({...form, email: e.target.value})}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            onChange={(e) => setForm({...form, password: e.target.value})}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            onChange={(e) => setForm({...form, password_confirmation: e.target.value})}
+                        />
+                    </div>
+                    <p>Register as:</p>
+                    <div className="flex gap-4">
+                        <button type="button" onClick={(e) => handleSubmit(e, 2)}>Staff</button>
+                        <button type="button" onClick={(e) => handleSubmit(e, 3)}>User</button>
+                    </div>
+                </form>
+                <p className="auth-footer">
+                    Already have an account? <a href="/login">Login</a>
+                </p>
+            </div>
         </div>
-        
     )
 }

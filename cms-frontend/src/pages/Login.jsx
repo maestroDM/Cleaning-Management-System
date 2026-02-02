@@ -1,6 +1,7 @@
 import {useState, useContext} from "react"
 import {AuthContext} from "../auth/AuthContext.jsx"
 import {useNavigate} from "react-router-dom"
+import "../styles/Auth.css"
 
 export default function Login() {
     const [email, setEmail] = useState("")
@@ -29,11 +30,49 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-            <button type="submit">Login</button>
-        </form>
+        <div className="auth-container">
+      <div className="auth-card-container">
+        <div className="auth-card">
+          <header className="auth-header">
+            <div className="brand-logo">CF</div>
+            <div className="brand-tagline">Cleaning Management System</div>
+          </header>
+
+          <h2 className="auth-title">Welcome Back</h2>
+          <p className="auth-subtitle">Sign in to continue</p>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Email address</label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button type="submit" className="auth-button">
+              Login
+            </button>
+          </form>
+
+          <footer className="auth-footer">
+            Don’t have an account?
+            <a href="/register" className="auth-link"> Create one</a>
+          </footer>
+        </div>
+      </div>
+    </div>
     )
 }
