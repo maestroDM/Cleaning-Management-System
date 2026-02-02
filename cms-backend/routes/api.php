@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ServiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,6 +44,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+
 /*
 |--------------------------------------------------------------------------
 | Protected Routes Example
@@ -57,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
             'data' => $request->user()
         ]);
     });
+    
 
 });
 
@@ -75,6 +78,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
             'message' => 'Welcome to the admin dashboard'
         ]);
     });
+    Route::post('/services', [ServiceController::class, 'store']);
+    Route::put('/services/{service}', [ServiceController::class, 'update']);
+    Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
 });
 
 Route::middleware(['auth:sanctum', 'role:staff'])->prefix('staff')->group(function () {
@@ -91,6 +97,9 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
             'message' => 'Welcome to the user profile area'
         ]);
     });
+    Route::get('/services', [ServiceController::class, 'index']);
+    Route::get('/services/{service}', [ServiceController::class, 'show']);
+
 });
 
 Route::middleware(['auth:sanctum', 'role:admin|staff'])->prefix('management')->group(function () {
@@ -99,4 +108,5 @@ Route::middleware(['auth:sanctum', 'role:admin|staff'])->prefix('management')->g
             'message' => 'Reports area'
         ]);
     });
+
 });
