@@ -6,6 +6,7 @@ import RequireAuth from "../auth/RequireAuth.jsx"
 import Tasks from "../pages/Tasks.jsx"
 import Services from "../pages/Services.jsx"
 import Unauthorized from "../pages/Unauthorized.jsx"
+import BookService from "../pages/BookService.jsx"
 
 export default function AppRoutes() {
   return (
@@ -29,6 +30,12 @@ export default function AppRoutes() {
         <Route path="/services" element={
             <RequireAuth allowedRoles={[3]}>
                 <Services />
+            </RequireAuth>
+        } />
+
+        <Route path="/services/:serviceId/book" element={
+            <RequireAuth allowedRoles={[3]}>
+                <BookService />
             </RequireAuth>
         } />
     </Routes>
