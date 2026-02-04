@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
-    protected $fillable = ['user_id', 'booking_date', 'status', 'total_amount'];
+    protected $fillable = ['user_id', 'service_id', 'booking_date', 'status'];
 
     public function user(){
         return $this->belongsToMany(User::class, 'booking_service')->withpivot('quantity', 'price');
@@ -18,6 +18,10 @@ class Booking extends Model
 
     public function staff(){
         return $this->belongsToMany(Staff::class, 'staff_assignments');
+    }
+
+    public function service(){
+        return $this->belongsTo(Service::class);
     }
     
 }

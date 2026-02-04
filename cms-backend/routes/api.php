@@ -100,6 +100,8 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/services/{service}', [ServiceController::class, 'show']);
 
+    Route::post('/bookings', [BookingController::class, 'store']);
+
 });
 
 Route::middleware(['auth:sanctum', 'role:admin|staff'])->prefix('management')->group(function () {
