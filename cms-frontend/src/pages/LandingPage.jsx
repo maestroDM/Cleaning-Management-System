@@ -1,16 +1,17 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import "../styles/landing.css";
-import ServicesSection from "../components/ServicesSection";
-import WhyChooseSection from "../components/WhyChooseSection";
+import {Header} from "../components/landing/Header";
+import { Hero } from "../components/landing/Hero";
+import { Services } from "../components/landing/Services";
+import { Footer } from "../components/landing/Footer";
+import { About} from "../components/landing/About";
 
 export default function LandingPage() {
   return (
     <>
-      <Navbar />
+      <Header />
       <Hero />
-      <ServicesSection />
-      <WhyChooseSection />
+      <Services />
+      <About />
+      <Footer />
 
       <button className="help-btn">?</button>
     </>

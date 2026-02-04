@@ -2,6 +2,8 @@ import {useState} from "react"
 import api from "../api/axios.js"
 import {useNavigate} from "react-router-dom"
 import "../styles/Auth.css"
+import {Link} from "react-router-dom"
+import Footer from "../components/landing/Footer.jsx"
 
 export default function Register() {
     const [form, setForm] = useState({
@@ -34,47 +36,85 @@ export default function Register() {
     }
 
     return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <h2 className="auth-title">Register</h2>
-                <form onSubmit={handleSubmit} className="auth-form">
-                    <div className="form-group">
-                        <input
-                            placeholder="Name"
-                            onChange={(e) => setForm({...form, name: e.target.value})}
-                        />
+        <div className="auth-page">
+              <div className="auth-container">
+                <div className="auth-card">
+                  <div className="auth-header">
+                    <Link className = "auth-logo" to="/">
+                      <span className="auth-logo-text">CleanFlow</span>
+                    </Link>
+                    <h1 className="auth-title">Create Your Account</h1>
+                    <p className="auth-subtitle>">Join CleanFlow for quality services</p>
+                  </div>
+        
+                  <div className="auth-body">
+                    <form className="auth-form" onSubmit={handleSubmit}>
+                    <div className="auth-input-group">
+                      <label className="auth-label">Full Name</label>
+                      <input
+                        id="Full name"
+                        type="text"
+                        className="auth-input"
+                        placeholder="Enter you full name"
+                        required
+                        onChange={(e) => setForm({...form, name: e.target.value})}
+                      />
                     </div>
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            onChange={(e) => setForm({...form, email: e.target.value})}
-                        />
+
+                    <div className="auth-input-group">
+                      <label className="auth-label">Email address</label>
+                      <input
+                        id="email"
+                        type="email"
+                        className="auth-input"
+                        placeholder="Enter your email address"
+                        required
+                        onChange={(e) => setForm({...form, email: e.target.value})}
+                      />
                     </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            onChange={(e) => setForm({...form, password: e.target.value})}
-                        />
+        
+                    <div className="auth-input-group">
+                      <label className="auth-label">Password</label>
+                      <input
+                        id="password"
+                        type="password"
+                        className="auth-input"
+                        placeholder="Enter your password"
+                        required
+                        onChange={(e) => setForm({...form, password: e.target.value})}
+                      />
                     </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Confirm Password"
-                            onChange={(e) => setForm({...form, password_confirmation: e.target.value})}
-                        />
+
+                    <div className="auth-input-group">
+                      <label className="auth-label">Confirm Password</label>
+                      <input
+                        id="password"
+                        type="password"
+                        className="auth-input"
+                        placeholder="Enter your password"
+                        required
+                        onChange={(e) => setForm({...form, password_confirmation: e.target.value})}
+                      />
                     </div>
-                    <p>Register as:</p>
-                    <div className="flex gap-4">
-                        <button type="button" onClick={(e) => handleSubmit(e, 2)}>Staff</button>
-                        <button type="button" onClick={(e) => handleSubmit(e, 3)}>User</button>
-                    </div>
-                </form>
-                <p className="auth-footer">
-                    Already have an account? <a href="/login">Login</a>
-                </p>
+        
+                    <button type="submit" className="auth-submit">
+                      Create Account
+                    </button>
+                  </form>
+                  </div>
+        
+                  <div className="auth-footer">
+                    <p className="auth-footer-text">
+                      Already have an account? <Link to="/login" className="auth-footer-link">Log In here</Link>
+                    </p>
+                    <Link to="/" className="auth-back-link">Back to Home</Link>
+        
+                  </div>
+        
+                </div>
+              </div>
+              <Footer />
             </div>
-        </div>
+
     )
 }

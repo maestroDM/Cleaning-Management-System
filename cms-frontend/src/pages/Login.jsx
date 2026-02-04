@@ -1,6 +1,8 @@
 import {useState, useContext} from "react"
 import {AuthContext} from "../auth/AuthContext.jsx"
 import {useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
+import Footer from "../components/landing/Footer.jsx" 
 import "../styles/Auth.css"
 
 export default function Login() {
@@ -30,49 +32,63 @@ export default function Login() {
     }
 
     return (
-        <div className="auth-container">
-      <div className="auth-card-container">
+    <div className="auth-page">
+      <div className="auth-container">
         <div className="auth-card">
-          <header className="auth-header">
-            <div className="brand-logo">CF</div>
-            <div className="brand-tagline">Cleaning Management System</div>
-          </header>
+          <div className="auth-header">
+            <Link className = "auth-logo" to="/">
+              <span className="auth-logo-text">CleanFlow</span>
+            </Link>
+            <h1 className="auth-title">Welcome Back</h1>
+            <p className="auth-subtitle>">Sign in to access services</p>
+          </div>
 
-          <h2 className="auth-title">Welcome Back</h2>
-          <p className="auth-subtitle">Sign in to continue</p>
-
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Email address</label>
+          <div className="auth-body">
+            <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-input-group">
+              <label className="auth-label">Email address</label>
               <input
+                id="email"
                 type="email"
-                placeholder="you@example.com"
+                className="auth-input"
+                placeholder="Enter your email address"
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            <div className="form-group">
-              <label>Password</label>
+            <div className="auth-input-group">
+              <label className="auth-label">Password</label>
               <input
+                id="password"
                 type="password"
-                placeholder="••••••••"
+                className="auth-input"
+                placeholder="Enter your password"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            <button type="submit" className="auth-button">
-              Login
+            <button type="submit" className="auth-submit">
+              Log In
             </button>
           </form>
+          </div>
 
-          <footer className="auth-footer">
-            Don’t have an account?
-            <a href="/register" className="auth-link"> Create one</a>
-          </footer>
+          <div className="auth-footer">
+            <p className="auth-footer-text">
+              Don’t have an account? <Link to="/register" className="auth-footer-link">Sign up here</Link>
+            </p>
+            <Link to="/" className="auth-back-link">Back to Home</Link>
+
+          </div>
+
         </div>
       </div>
+      <Footer />
     </div>
-    )
+    
+  
+
+  )
 }

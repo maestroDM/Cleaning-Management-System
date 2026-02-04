@@ -7,6 +7,7 @@ import Tasks from "../pages/Tasks.jsx"
 import Services from "../pages/Services.jsx"
 import Unauthorized from "../pages/Unauthorized.jsx"
 import BookService from "../pages/BookService.jsx"
+import LandingPage from "../pages/LandingPage.jsx"
 
 export default function AppRoutes() {
   return (
@@ -38,6 +39,8 @@ export default function AppRoutes() {
                 <BookService />
             </RequireAuth>
         } />
+
+        <Route path="/" element={<LandingPage />} />
     </Routes>
   )
 }
