@@ -1,4 +1,5 @@
 import {useState, useContext} from "react"
+
 import {AuthContext} from "../auth/AuthContext.jsx"
 import {useNavigate} from "react-router-dom"
 import {Link} from "react-router-dom"
@@ -8,11 +9,14 @@ import "../styles/Auth.css"
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false);
     const {login} = useContext(AuthContext)
     const navigate = useNavigate()
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
         try {
             const user = await login({email, password})
             
@@ -28,7 +32,10 @@ export default function Login() {
         } catch (error) {
             console.error("Login error:", error.response?.data || error.message)
             alert(error.response?.data?.message || "Login failed")
+        } finally{
+          setLoading(false)
         }
+
     }
 
     return (
@@ -69,8 +76,8 @@ export default function Login() {
               />
             </div>
 
-            <button type="submit" className="auth-submit">
-              Log In
+            <button type="submit" className="auth-submit" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
           </div>
@@ -84,9 +91,13 @@ export default function Login() {
           </div>
 
         </div>
+      
       </div>
+
       <Footer />
     </div>
+
+  
     
   
 

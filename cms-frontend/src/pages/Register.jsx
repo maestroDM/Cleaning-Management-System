@@ -14,6 +14,8 @@ export default function Register() {
     })
 
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState("");
 
     const handleChange = (e) => {
         setForm({
@@ -22,16 +24,21 @@ export default function Register() {
         })
     }
 
-    const handleSubmit = async (e, roleId) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        //Inject the role id based on which button was clicked
-        const finalData = {...form, role_id: roleId}
+        setLoading(true)
+        setSuccess("")
+        //Inject the role id to user
+        const finalData = {...form, role_id: 3}
         try {
             await api.post("/register", finalData)
+            setSuccess("Account created successfully. You can now log in")
             navigate("/login")
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message)
             alert(error.response?.data?.message || "Registration failed")
+        } finally{
+          setLoading(false)
         }
     }
 
@@ -49,6 +56,11 @@ export default function Register() {
         
                   <div className="auth-body">
                     <form className="auth-form" onSubmit={handleSubmit}>
+                      {success && (
+                        <div className="success-alert">
+                          {success}
+                        </div>
+                      )}
                     <div className="auth-input-group">
                       <label className="auth-label">Full Name</label>
                       <input
@@ -97,8 +109,8 @@ export default function Register() {
                       />
                     </div>
         
-                    <button type="submit" className="auth-submit">
-                      Create Account
+                    <button type="submit" className="auth-submit" disabled={loading}>
+                      {loading ? "Creating account..." : "Sign Up"}
                     </button>
                   </form>
                   </div>

@@ -252,3 +252,11 @@
 .auth-back-link:hover {
   color: var(--color-primary);
 }
+
+.success-alert {
+  background: #e6f7ec;
+  color: #067647;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}

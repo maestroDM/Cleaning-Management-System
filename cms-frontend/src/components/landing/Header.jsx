@@ -22,8 +22,8 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="header-actions">
-          <Link to="/auth" className="btn btn-ghost">Log In</Link>
-          <Link to="/auth?mode=signup" className="btn btn-primary">Sign Up</Link>
+          <Link to="/login" className="btn btn-ghost">Log In</Link>
+          <Link to="/register" className="btn btn-primary">Sign Up</Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -56,8 +56,8 @@ export function Header() {
             </a>
           </nav>
           <div className="header-mobile-actions">
-            <Link to="/auth" className="btn btn-secondary">Log In</Link>
-            <Link to="/auth?mode=signup" className="btn btn-primary">Sign Up</Link>
+            <Link to="/login" className="btn btn-secondary">Log In</Link>
+            <Link to="/register" className="btn btn-primary">Sign Up</Link>
           </div>
         </div>
       )}
