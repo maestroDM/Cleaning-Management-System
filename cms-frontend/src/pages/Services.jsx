@@ -1,4 +1,4 @@
-import "../../styles/components/Services.css";
+
 import { useEffect, useState } from "react";
 import { fetchServices } from "../api/serviceApi";
 import { useNavigate } from "react-router-dom";

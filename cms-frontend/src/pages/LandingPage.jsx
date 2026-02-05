@@ -12,8 +12,6 @@ export default function LandingPage() {
       <Services />
       <About />
       <Footer />
-
-      <button className="help-btn">?</button>
     </>
   );
 }
