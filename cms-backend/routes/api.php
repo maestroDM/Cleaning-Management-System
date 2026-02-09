@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\StaffController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,6 +82,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::post('/services', [ServiceController::class, 'store']);
     Route::put('/services/{service}', [ServiceController::class, 'update']);
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+
+    Route::post('/staff', [StaffController::class, 'store']);
+    Route::patch('/staff/{user}/deactivate', [StaffController::class, 'deactivate']);
+    Route::delete('staff/{user}', [StaffController::class, 'destroy']);
 });
 
 Route::middleware(['auth:sanctum', 'role:staff'])->prefix('staff')->group(function () {
