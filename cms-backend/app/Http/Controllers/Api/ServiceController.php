@@ -19,7 +19,7 @@ class ServiceController extends Controller
             'category_id' => 'required|exists:service_categories,id',
             'name' => 'required|string|max:255|unique:services,name',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
         ]);
 
         return Service::create($validated);
@@ -36,12 +36,12 @@ class ServiceController extends Controller
             'category_id' => 'sometimes|required|exists:service_categories,id',
             'name' => 'sometimes|required|string|max:255|unique:services,name,' . $service->id,
             'description' => 'nullable|string',
-            'price' => 'sometimes|required|numeric|min:0',
+            'price' => 'sometimes|numeric|nullable|min:0',
         ]);
 
         $service->update($validated);
 
-        return $service ->load('category');
+        return response() ->json($service, 200);
     }
 
     public function destroy(Service $service)

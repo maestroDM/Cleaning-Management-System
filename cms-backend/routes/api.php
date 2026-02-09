@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\StaffController;
+use App\Http\Controllers\Api\ServiceCategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -82,6 +83,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::post('/services', [ServiceController::class, 'store']);
     Route::put('/services/{service}', [ServiceController::class, 'update']);
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+    Route::get('/services', [ServiceController::class, 'index']);
+    Route::get('/services/{service}', [ServiceController::class, 'show']);
+    Route::get('/service-categories', [ServiceCategoryController::class, 'index']);
 
     Route::post('/staff', [StaffController::class, 'store']);
     Route::patch('/staff/{user}/deactivate', [StaffController::class, 'deactivate']);

@@ -8,6 +8,7 @@ import Services from "../pages/Services.jsx"
 import Unauthorized from "../pages/Unauthorized.jsx"
 import BookService from "../pages/BookService.jsx"
 import LandingPage from "../pages/LandingPage.jsx"
+import AdminServices from "../pages/admin/AdminServices.jsx"
 
 export default function AppRoutes() {
   return (
@@ -19,7 +20,7 @@ export default function AppRoutes() {
             path="/dashboard"
             element={
                 <RequireAuth allowedRoles={[1]}>
-                    <Dashboard />
+                    <AdminServices />
                 </RequireAuth>
             }
         />
