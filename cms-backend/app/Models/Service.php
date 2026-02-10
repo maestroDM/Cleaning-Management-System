@@ -17,4 +17,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Booking::class, 'booking_service')->withpivot('quantity', 'price');
     }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quotes::class);
+    }
 }

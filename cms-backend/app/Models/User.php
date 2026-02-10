@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quotes::class);
+    }
+
+    public function reviewQuotes()
+    {
+        return $this->hasMany(Quote::class, 'reviewed_by');
+    }
 }

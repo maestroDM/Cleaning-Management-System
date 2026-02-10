@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\StaffController;
 use App\Http\Controllers\Api\ServiceCategoryController;
+use App\Http\Controllers\Api\QuoteController;
+use App\Http\Controllers\Api\AdminQuoteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -90,6 +92,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::post('/staff', [StaffController::class, 'store']);
     Route::patch('/staff/{user}/deactivate', [StaffController::class, 'deactivate']);
     Route::delete('staff/{user}', [StaffController::class, 'destroy']);
+
+    Route::get('/quotes', [AdminQuoteController::class, 'index']);
+    Route::get('/quotes/{quote}', [AdminQuoteController::class, 'show']);
+    Route::patch('quotes/{quote}/review', [AdminQuoteController::class, 'review']);
 });
 
 Route::middleware(['auth:sanctum', 'role:staff'])->prefix('staff')->group(function () {
@@ -108,6 +114,8 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
     });
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/services/{service}', [ServiceController::class, 'show']);
+    Route::post('/quotes', [QuoteController::class, 'store']);
+    Route::patch('/quotes/{quote}/decision', [QuoteController::class, 'decide']);
 
     Route::post('/bookings', [BookingController::class, 'store']);
 
