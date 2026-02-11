@@ -8,16 +8,8 @@ use App\Http\Controllers\Api\StaffController;
 use App\Http\Controllers\Api\ServiceCategoryController;
 use App\Http\Controllers\Api\QuoteController;
 use App\Http\Controllers\Api\AdminQuoteController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-| 
-| Here is where you can register API routes for your application.
-| These routes are loaded by the RouteServiceProvider and assigned
-| to the "api" middleware group. All routes will be prefixed with /api.
-|
-*/
+use App\Http\Controllers\Api\BookingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -116,8 +108,8 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
     Route::get('/services/{service}', [ServiceController::class, 'show']);
     Route::post('/quotes', [QuoteController::class, 'store']);
     Route::patch('/quotes/{quote}/decision', [QuoteController::class, 'decide']);
-
     Route::post('/bookings', [BookingController::class, 'store']);
+    Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel']);
 
 });
 

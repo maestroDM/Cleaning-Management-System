@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quote extends Model
 {
     public const STATUS_PENDING = 'pending';
-    public const STATUS_REVEIWED = 'reviewed';
+    public const STATUS_REVIEWED = 'reviewed';
     public const STATUS_ACCEPTED = 'accepted';
     public const STATUS_REJECTED = 'rejected';
 
