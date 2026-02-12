@@ -85,5 +85,48 @@ class BookingController extends Controller
             'booking'=> $booking
         ]);
     }
+
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $query = Booking::with([
+            'quote.service'
+        ])->where('user_id', $user->id);
+
+        //Optional filter by status
+        if($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->latest()->paginate(10);
+
+        return response()->json([
+            'suuccess' => true,
+            'data'=> $bookings
+        ]);
+    }
+
+    public function adminIndex(Request $request)
+    {
+        $query = Booking::query()->with([
+            'user:id,name,email',
+            'quote:id,service_id'
+        ]);
+
+        if($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if($request->has('date')) {
+            $query->whereDate('booking_date', $request->date);
+        }
+
+        $bookings = $query->latest()->paginate(15);
+
+        return response()->json([
+            'success' => true,
+            'data' => $bookings
+        ]);
+    }
 }
 

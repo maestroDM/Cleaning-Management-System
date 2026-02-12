@@ -88,6 +88,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::get('/quotes', [AdminQuoteController::class, 'index']);
     Route::get('/quotes/{quote}', [AdminQuoteController::class, 'show']);
     Route::patch('quotes/{quote}/review', [AdminQuoteController::class, 'review']);
+
+    Route::get('/bookings', [BookingController::class, 'adminIndex']);
 });
 
 Route::middleware(['auth:sanctum', 'role:staff'])->prefix('staff')->group(function () {
@@ -110,7 +112,7 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
     Route::patch('/quotes/{quote}/decision', [QuoteController::class, 'decide']);
     Route::post('/bookings', [BookingController::class, 'store']);
     Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel']);
-
+    Route::get('/bookings', [BookingController::class, 'index']);
 });
 
 Route::middleware(['auth:sanctum', 'role:admin|staff'])->prefix('management')->group(function () {
