@@ -16,13 +16,6 @@ class QuoteController extends Controller
         'additional_info' => ['nullable', 'string', 'max:2000'],
     ]);
 
-    $quote = Quote::create([
-        'user_id' => $request->user()->id,
-        'service_id' => $validated['service_id'],
-        'additional_info' => $validated['additional_info'] ?? null,
-        'status' => 'pending',
-    ]);
-
     $exists = Quote::where('user_id', $request->user()->id)
         ->where('service_id', $validated['service_id'])
         ->where('status', 'pending')
@@ -33,6 +26,13 @@ class QuoteController extends Controller
             'message' => 'You already have a pending quote for this service'
         ], 409);
     }
+
+     $quote = Quote::create([
+        'user_id' => $request->user()->id,
+        'service_id' => $validated['service_id'],
+        'additional_info' => $validated['additional_info'] ?? null,
+        'status' => 'pending',
+    ]);
 
 
 

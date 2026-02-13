@@ -14,7 +14,9 @@ const navItems = {
   client: [
     { icon: '📅', label: 'Booking', href: '/client', id: 'booking' },
     { icon: '📜', label: 'My Bookings', href: '/client/bookings', id: 'bookings' },
+    
   ],
+
 };
 
 const portalTitles = {

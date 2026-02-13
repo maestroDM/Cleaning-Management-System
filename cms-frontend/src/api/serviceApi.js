@@ -1,52 +1,85 @@
-import axios from 'axios';
+import axiosInstance from "./axios.js";
 
-const API_URL = 'http://127.0.0.1:8000/api';
-
+/* =============================
+   USER SERVICES
+============================= */
 export const fetchServices = async () => {
-    return axios.get(`${API_URL}/user/services`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+    try {
+        const response = await axiosInstance.get("/user/services");
+        return response.data;
+    } catch (error) {
+        throw error;
     }
-    );
 };
 
+/* =============================
+   ADMIN SERVICES
+============================= */
 export const fetchAdminServices = async () => {
-    return axios.get(`${API_URL}/admin/services`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+    try {
+        const response = await axiosInstance.get("/admin/services");
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const fetchServiceCategories = () => {
-    return axios.get(`${API_URL}/admin/service-categories`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+/* =============================
+   SERVICE CATEGORIES
+============================= */
+export const fetchServiceCategories = async () => {
+    try {
+        const response = await axiosInstance.get("/admin/service-categories");
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const createService = (data) => {
-    return axios.post(`${API_URL}/admin/services`, data, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+/* =============================
+   CREATE SERVICE
+============================= */
+export const createService = async (data) => {
+    try {
+        const response = await axiosInstance.post("/admin/services", {
+            name: data.name,
+            category_id: data.category_id,
+            price: data.price,
+            description: data.description
+        });
+
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const updateService = (id, data) => {
-    return axios.put(`${API_URL}/admin/services/${id}`, data, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+/* =============================
+   UPDATE SERVICE
+============================= */
+export const updateService = async (id, data) => {
+    try {
+        const response = await axiosInstance.put(`/admin/services/${id}`, {
+            name: data.name,
+            category_id: data.category_id,
+            price: data.price,
+            description: data.description
+        });
+
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const deleteService = (id) => {
-    return axios.delete(`${API_URL}/admin/services/${id}`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+/* =============================
+   DELETE SERVICE
+============================= */
+export const deleteService = async (id) => {
+    try {
+        const response = await axiosInstance.delete(`/admin/services/${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };

@@ -108,8 +108,10 @@ Route::middleware(['auth:sanctum', 'role:user'])->prefix('user')->group(function
     });
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/services/{service}', [ServiceController::class, 'show']);
+
     Route::post('/quotes', [QuoteController::class, 'store']);
     Route::patch('/quotes/{quote}/decision', [QuoteController::class, 'decide']);
+    
     Route::post('/bookings', [BookingController::class, 'store']);
     Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel']);
     Route::get('/bookings', [BookingController::class, 'index']);
